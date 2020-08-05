@@ -65,7 +65,9 @@ export interface Context {
 }
 
 function isTextAnnotation(a: Annotation<any>): a is TextAnnotation {
-  return a.vendorPrefix === "atjson" && a.type === "text";
+  return (
+    a.getAnnotationConstructor().vendorPrefix === "atjson" && a.type === "text"
+  );
 }
 
 function compile(
@@ -213,7 +215,7 @@ export default class Renderer {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  text(text: string, _: Context) {
+  text(text: string, _: Context): any {
     return text;
   }
 }

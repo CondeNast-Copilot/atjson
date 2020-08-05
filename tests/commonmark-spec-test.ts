@@ -3,10 +3,10 @@
  */
 import { HIR } from "@atjson/hir";
 import OffsetSource from "@atjson/offset-annotations";
+import CommonMarkRenderer from "@atjson/renderer-commonmark";
 import CommonMarkSource from "@atjson/source-commonmark";
 import * as spec from "commonmark-spec";
 import MarkdownIt from "markdown-it";
-import CommonMarkRenderer from "../src/index";
 
 const skippedTests = [
   142, // Additional newline after HTML block
