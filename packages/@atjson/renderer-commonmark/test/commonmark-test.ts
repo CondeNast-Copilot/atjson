@@ -765,6 +765,21 @@ After all the lists
       test.each([
         ["&emsp;", "\u2003"],
         ["&nbsp;", "\u00a0"],
+        ["&#8192;", "\u2000"],
+        ["&#8193;", "\u2001"],
+        ["&ensp;", "\u2002"],
+        ["&#8196;", "\u2004"],
+        ["&#8197;", "\u2005"],
+        ["&#8198;", "\u2006"],
+        ["&#8199;", "\u2007"],
+        ["&#8200;", "\u2008"],
+        ["&#8201;", "\u2009"],
+        ["&#8202;", "\u200A"],
+        ["&#8203;", "\u200B"],
+        ["&#8239;", "\u202F"],
+        ["&#8287;", "\u205F"],
+        ["&#12288;", "\u3000"],
+        ["&#65279;", "\uFEFF"],
       ])("%s", (entity, unicode) => {
         let doc = new OffsetSource({ content: unicode, annotations: [] });
         expect(CommonmarkRenderer.render(doc)).toBe(entity);
@@ -1379,7 +1394,7 @@ After all the lists
     });
 
     expect(CommonmarkRenderer.render(document)).toBe(
-      "&nbsp;\n\n**text**\n\n\u202F"
+      "&nbsp;\n\n**text**\n\n&#8239;"
     );
   });
 
@@ -1462,22 +1477,23 @@ After all the lists
     );
   });
 
-  test("emspaces are encoded", () => {
+  test("unicode whitespace characters are encoded", () => {
     let document = new OffsetSource({
-      content: "\u2003\u2003\u2003\u2003Hello \n    This is my text",
+      content:
+        "\u00A0\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200A\u200B\u202F\u205F\u3000\uFEFFHello \n    This is my text",
       annotations: [
         {
           id: "1",
           type: "-offset-paragraph",
           start: 0,
-          end: 11,
+          end: 24,
           attributes: {},
         },
         {
           id: "2",
           type: "-offset-paragraph",
-          start: 11,
-          end: 30,
+          start: 24,
+          end: 43,
           attributes: {},
         },
       ],
@@ -1486,7 +1502,7 @@ After all the lists
     let markdown = CommonmarkRenderer.render(document);
 
     expect(markdown).toBe(
-      "&emsp;&emsp;&emsp;&emsp;Hello\n\nThis is my text\n\n"
+      "&nbsp;&#8192;&#8193;&ensp;&emsp;&#8196;&#8197;&#8198;&#8199;&#8200;&#8201;&#8202;&#8203;&#8239;&#8287;&#12288;&#65279;Hello\n\nThis is my text\n\n"
     );
     // Make sure we're not generating code in the round-trip
     expect(markdown).toEqual(

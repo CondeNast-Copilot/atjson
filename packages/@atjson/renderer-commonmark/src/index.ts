@@ -236,14 +236,44 @@ function escapeHtmlEntities(text: string) {
     .replace(/&([^\s]+);/g, "\\&$1;")
     .replace(/</g, "&lt;")
     .replace(/\u00A0/gu, "&nbsp;")
-    .replace(/\u2003/gu, "&emsp;");
+    .replace(/\u2000/gu, "&#8192;")
+    .replace(/\u2001/gu, "&#8193;")
+    .replace(/\u2002/gu, "&ensp;")
+    .replace(/\u2003/gu, "&emsp;")
+    .replace(/\u2004/gu, "&#8196;")
+    .replace(/\u2005/gu, "&#8197;")
+    .replace(/\u2006/gu, "&#8198;")
+    .replace(/\u2007/gu, "&#8199;")
+    .replace(/\u2008/gu, "&#8200;")
+    .replace(/\u2009/gu, "&#8201;")
+    .replace(/\u200A/gu, "&#8202;")
+    .replace(/\u200B/gu, "&#8203;")
+    .replace(/\u202F/gu, "&#8239;")
+    .replace(/\u205F/gu, "&#8287;")
+    .replace(/\u3000/gu, "&#12288;")
+    .replace(/\uFEFF/gu, "&#65279;");
 }
 
 function escapeEntities(text: string) {
   return text
     .replace(/&([^\s]+);/g, "\\&$1;")
     .replace(/\u00A0/gu, "&nbsp;")
-    .replace(/\u2003/gu, "&emsp;");
+    .replace(/\u2000/gu, "&#8192;")
+    .replace(/\u2001/gu, "&#8193;")
+    .replace(/\u2002/gu, "&ensp;")
+    .replace(/\u2003/gu, "&emsp;")
+    .replace(/\u2004/gu, "&#8196;")
+    .replace(/\u2005/gu, "&#8197;")
+    .replace(/\u2006/gu, "&#8198;")
+    .replace(/\u2007/gu, "&#8199;")
+    .replace(/\u2008/gu, "&#8200;")
+    .replace(/\u2009/gu, "&#8201;")
+    .replace(/\u200A/gu, "&#8202;")
+    .replace(/\u200B/gu, "&#8203;")
+    .replace(/\u202F/gu, "&#8239;")
+    .replace(/\u205F/gu, "&#8287;")
+    .replace(/\u3000/gu, "&#12288;")
+    .replace(/\uFEFF/gu, "&#65279;");
 }
 
 function unescapeEntities(text: string) {
@@ -251,7 +281,22 @@ function unescapeEntities(text: string) {
     .replace(/&amp;/gi, "&")
     .replace(/&lt;/gi, "<")
     .replace(/&nbsp;/gi, "\u00A0")
-    .replace(/&emsp;/gi, "\u2003");
+    .replace(/&emsp;/gi, "\u2003")
+    .replace(/&#8192;/gi, "\u2000")
+    .replace(/&#8193;/gi, "\u2001")
+    .replace(/&ensp;/gi, "\u2002")
+    .replace(/&#8196;/gi, "\u2004")
+    .replace(/&#8197;/gi, "\u2005")
+    .replace(/&#8198;/gi, "\u2006")
+    .replace(/&#8199;/gi, "\u2007")
+    .replace(/&#8200;/gi, "\u2008")
+    .replace(/&#8201;/gi, "\u2009")
+    .replace(/&#8202;/gi, "\u200A")
+    .replace(/&#8203;/gi, "\u200B")
+    .replace(/&#8239;/gi, "\u202F")
+    .replace(/&#8287;/gi, "\u205F")
+    .replace(/&#12288;/gi, "\u3000")
+    .replace(/&#65279;/gi, "\uFEFF");
 }
 
 function escapeAttribute(text: string) {
