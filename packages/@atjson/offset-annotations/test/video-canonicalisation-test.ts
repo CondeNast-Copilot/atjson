@@ -113,4 +113,16 @@ describe("VideoURLs", () => {
       });
     });
   });
+
+  describe("wirewax", () => {
+    test.each([
+      "https://embedder.wirewax.com/8203724",
+      "https://embedder.wirewax.com/8203724/example",
+    ])("%s", (url) => {
+      expect(VideoURLs.identify(new URL(url))).toEqual({
+        url: "https://embedder.wirewax.com/8203724",
+        provider: VideoURLs.Provider.WIREWAX,
+      });
+    });
+  });
 });

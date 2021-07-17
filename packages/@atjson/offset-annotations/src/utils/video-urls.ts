@@ -229,12 +229,25 @@ function normalizeTwitchURL(url: IUrl) {
   }
 }
 
+function isWirewaxURL(url: IUrl) {
+  return url.host === "embedder.wirewax.com";
+}
+
+function normalizeWirewaxURL(url: IUrl) {
+  let normalized = new URL("https://embedder.wirewax.com");
+
+  let videoId = without<string>(url.pathname.split("/"), "")[0];
+  normalized.pathname = `/${videoId}`;
+  return normalized.href;
+}
+
 export enum Provider {
   YOUTUBE = "YOUTUBE",
   VIMEO = "VIMEO",
   BRIGHTCOVE = "BRIGHTCOVE",
   DAILYMOTION = "DAILYMOTION",
   TWITCH = "TWITCH",
+  WIREWAX = "WIREWAX",
   OTHER = "OTHER",
 }
 
@@ -271,6 +284,13 @@ export function identify(url: IUrl) {
     return {
       provider: Provider.TWITCH,
       url: normalizeTwitchURL(url),
+    };
+  }
+
+  if (isWirewaxURL(url)) {
+    return {
+      provider: Provider.WIREWAX,
+      url: normalizeWirewaxURL(url),
     };
   }
 
