@@ -41,7 +41,7 @@
     "lint-staged": "11.0.1",
     "markdown-it": "10.0.0",
     "minimist": "1.2.5",
-    "prettier": "2.3.0",
+    "prettier": "2.3.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "ts-loader": "9.2.3",
